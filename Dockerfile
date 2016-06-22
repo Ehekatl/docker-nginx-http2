@@ -2,6 +2,14 @@ FROM debian:jessie
 
 MAINTAINER Dylan Wang "wanghaoyu@frazil.me"
 
+# 更换debian源为国内源
+RUN echo "deb http://ftp.cn.debian.org/debian jessie main" > /etc/apt/sources.list \
+    && echo "deb-src http://ftp.cn.debian.org/debian jessie main" >> /etc/apt/sources.list \
+    && echo "deb http://ftp.cn.debian.org/debian jessie-updates main" >> /etc/apt/sources.list \
+    && echo "deb-src http://ftp.cn.debian.org/debian jessie-updates main" >> /etc/apt/sources.list \
+    && echo "deb http://security.debian.org/ jessie/updates main" >> /etc/apt/sources.list \
+    && echo "deb-src http://security.debian.org/ jessie/updates main" >> /etc/apt/sources.list
+
 ENV NGINX_VERSION 1.11.1
 ENV OPENSSL_VERSION 1.0.2h
 
