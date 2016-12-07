@@ -11,7 +11,7 @@ RUN echo "deb http://ftp.cn.debian.org/debian jessie main" > /etc/apt/sources.li
     && echo "deb-src http://security.debian.org/ jessie/updates main" >> /etc/apt/sources.list
 
 ENV NGINX_VERSION 1.11.1
-ENV OPENSSL_VERSION 1.0.2h
+ENV OPENSSL_VERSION 1.1.0c
 
 RUN apt-get update && apt-get install -y ca-certificates build-essential wget libpcre3 libpcre3-dev zlib1g zlib1g-dev libssl-dev
 
