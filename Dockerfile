@@ -10,8 +10,8 @@ RUN echo "deb http://mirrors.aliyun.com/debian/ jessie main non-free contrib" > 
     && echo "deb http://mirrors.aliyun.com/debian-security/ jessie/updates main non-free contrib" >> /etc/apt/sources.list \
     && echo "deb-src http://mirrors.aliyun.com/debian-security/ jessie/updates main non-free contrib" >> /etc/apt/sources.list
 
-ENV NGINX_VERSION 1.10.2
-ENV OPENSSL_VERSION 1.1.0c
+ENV NGINX_VERSION 1.12.0
+ENV OPENSSL_VERSION 1.1.0e
 
 RUN apt-get update
 RUN apt-get upgrade -y
