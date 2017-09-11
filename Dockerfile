@@ -1,14 +1,25 @@
 FROM debian:jessie
 
-MAINTAINER Dylan Wang "wanghaoyu@frazil.me"
+MAINTAINER Wan Yi "mail@wanyi.me"
 
-ENV NGINX_VERSION 1.9.6
+ENV NGINX_VERSION 1.13.5
+ENV OPENSSL_VERSION 1.1.0f
 
-RUN apt-get update && apt-get install -y ca-certificates build-essential wget libpcre3 libpcre3-dev zlib1g zlib1g-dev libssl-dev
+# 更换debian源为国内源
+RUN echo "deb http://mirrors.aliyun.com/debian/ jessie main non-free contrib" > /etc/apt/sources.list \
+    && echo "deb http://mirrors.aliyun.com/debian/ jessie-proposed-updates main non-free contrib" >> /etc/apt/sources.list \
+    && echo "deb-src http://mirrors.aliyun.com/debian/ jessie main non-free contrib" >> /etc/apt/sources.list \
+    && echo "deb-src http://mirrors.aliyun.com/debian/ jessie-proposed-updates main non-free contrib" >> /etc/apt/sources.list \
+    && echo "deb http://mirrors.aliyun.com/debian-security/ jessie/updates main non-free contrib" >> /etc/apt/sources.list \
+    && echo "deb-src http://mirrors.aliyun.com/debian-security/ jessie/updates main non-free contrib" >> /etc/apt/sources.list
 
-RUN wget http://www.openssl.org/source/openssl-1.0.2d.tar.gz \
-  && tar -xvzf openssl-1.0.2d.tar.gz \
-  && cd openssl-1.0.2d \
+RUN apt-get update
+RUN apt-get upgrade -y
+RUN apt-get install -y ca-certificates build-essential wget libpcre3 libpcre3-dev zlib1g zlib1g-dev libssl-dev
+
+RUN wget http://www.openssl.org/source/openssl-${OPENSSL_VERSION}.tar.gz \
+  && tar -xvzf openssl-${OPENSSL_VERSION}.tar.gz \
+  && cd openssl-${OPENSSL_VERSION} \
   && ./config \
     --prefix=/usr \
     --openssldir=/usr/ssl \
